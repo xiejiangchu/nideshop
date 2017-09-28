@@ -19,6 +19,7 @@
     "request-promise": "^4.2.1",
     "source-map-support": "0.4.0",
     "think-cors": "^1.1.2",
+    "think-view-nunjucks": "^1.0.7",
     "thinkjs": "2.2.x",
     "uid-safe": "^2.1.4"
   },

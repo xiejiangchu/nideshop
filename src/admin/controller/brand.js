@@ -3,7 +3,7 @@
 import Base from './base.js';
 const _ = require('lodash');
 const fs = require('fs');
-let gm = require('gm').subClass({imageMagick: true});
+let gm = require('gm').subClass({ imageMagick: true });
 
 export default class extends Base {
     /**
@@ -17,7 +17,7 @@ export default class extends Base {
         let name = this.get('name') || '';
 
         let model = this.model('brand');
-        let data = await model.field(['id', 'name', 'floor_price', 'app_list_pic_url', 'is_new', 'sort_order', 'is_show']).where({name: ['like', `%${name}%`]}).page(page, size).countSelect();
+        let data = await model.field(['id', 'name', 'floor_price', 'app_list_pic_url', 'is_new', 'sort_order', 'is_show']).where({ name: ['like', `%${name}%`] }).page(page, size).countSelect();
 
         return this.success(data);
     }
@@ -25,12 +25,12 @@ export default class extends Base {
     async infoAction() {
         let id = this.get('id');
         let model = this.model('brand');
-        let data = await model.where({id: id}).find();
+        let data = await model.where({ id: id }).find();
 
         return this.success(data);
     }
 
-    async storeAction(){
+    async storeAction() {
 
         if (!this.isPost()) {
             return false;
@@ -45,7 +45,7 @@ export default class extends Base {
         if (id > 0) {
             console.log('update')
 
-            await model.where({id: id}).update(values);
+            await model.where({ id: id }).update(values);
         } else {
             delete values.id;
             console.log('add')
@@ -55,9 +55,9 @@ export default class extends Base {
 
     }
 
-    async destoryAction(){
+    async destoryAction() {
         let id = this.post('id');
-        await this.model('brand').where({id: id}).limit(1).delete();
+        await this.model('brand').where({ id: id }).limit(1).delete();
         return this.success();
     }
 
@@ -70,7 +70,7 @@ export default class extends Base {
         let filename = '/static/brand/' + think.uuid(32) + '.jpg';
         gm(brandFile.path)
             .resize(750, 420, "!")
-            .write(think.RESOURCE_PATH + filename, function (err) {
+            .write(think.RESOURCE_PATH + filename, function(err) {
                 if (err) {
                     that.fail('图片上传失败');
                 }
